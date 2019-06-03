@@ -1,28 +1,79 @@
 Dessert YAML
 ============
 
-This library is a clone of [yaml-js], written in Rust for WebAssembly.
+This library is the base API for YAML modules, written in Rust for WebAssembly.
 
-[yaml-js]: https://www.npmjs.com/package/yaml-js
+For simplicity's sake, this module has been written using [serde yaml], but at the cost of flexibility. Some feature might be missing for now, like passing parsing options when loading/dumping.
+
+[serde yaml]: https://github.com/dtolnay/serde-yaml
 
 ## Summary
 * [Installation](#installation)
-* [Usage](#usage)
+* [API](#api)
+* [Building](#building)
 
 
 ## Installation
 ```sh
-npm install dessert-yaml
+npm install dessert-yaml-core
 ```
 
+## API
+This section lists methods exported from Wasm to Javascript.
 
-## Usage
-Replace 
-```javascript
-import yaml from "yaml-js"
+> Note:  
+Althought this library is usable as-is, it should be used as a dependency for a connector, such as [dessert-js-yaml].
+
+[dessert-js-yaml]: https://github.com/dessert-wasm/dessert-js-yaml
+
+``` javascript
+yaml = require('dessert-js-yaml');
+fs   = require('fs');
+
+// Get document, or throw exception on error
+try {
+  let doc = yaml.load(fs.readFileSync('/home/ixti/example.yml', 'utf8'));
+  console.log(doc);
+
+  // Print the parsed object as a YAML stream
+  let yaml_stream = yaml.dump(doc);
+  console.log(yaml_stream);
+} catch (e) {
+  console.log(e);
+}
 ```
-by
-```javascript
-import * as yaml from "dessert-yaml"
+
+### load(string, [, options])
+Most simple way of parsing a document. Parses string as single YAML document. Returns a JavaScript object or throws YAMLException on error. options aren't used as for now.
+
+
+### loadSafe(string, [, options])
+Same as load()
+
+
+### loadAll(string, [, options])
+Same as safeLoad(), but understands multi-document sources. Applies iterator to each document if specified, or returns array of documents.
+Currently same as load() because serde_yaml doesn't support multi document yet, and data structure from yaml-rust aren't serializable.
+
+
+### dump(object, [, options])
+Serializes object as a YAML document
+
+
+### safeDump(objects, [, options])
+Same as dump()
+
+
+## Building
+The package can be built using [wasm-pack]
+
+[wasm-pack]: https://rustwasm.github.io/wasm-pack/installer/
+
+```sh
+wasm-pack build --target browser
 ```
-And it should work the same, but faster with Wasm !
+
+Testing:
+```sh
+wasm-pack test --headless --[firefox|chrome|safari]
+```
