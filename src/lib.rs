@@ -19,7 +19,6 @@ extern "C" {
 
 #[wasm_bindgen]
 pub fn load(yml_str: &str, options: JsValue) -> Result<JsValue, JsValue> {
-    // log(&format!("{:?}", options));
     let yml: serde_json::Value = match serde_yaml::from_str(&yml_str) {
         Ok(res) => res,
         Err(e) => {
@@ -62,8 +61,6 @@ pub fn load_all(yml_str: &str, options: JsValue) -> Result<JsValue, JsValue> {
 
 #[wasm_bindgen]
 pub fn dump(object: JsValue, options: JsValue) -> Result<String, JsValue> {
-    // log(&format!("{:?}", options));
-
     let value: serde_yaml::Value = match object.into_serde() {
         Ok(v) => v,
         Err(e) => {
