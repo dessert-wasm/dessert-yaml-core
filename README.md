@@ -9,7 +9,7 @@ For simplicity's sake, this module has been written using [serde yaml], but at t
 
 ## Summary
 * [Installation](#installation)
-* [Performance](#Performance)
+* [Performance](#performance)
 * [API](#api)
 * [Building](#building)
 
