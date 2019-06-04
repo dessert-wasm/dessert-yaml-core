@@ -9,6 +9,7 @@ For simplicity's sake, this module has been written using [serde yaml], but at t
 
 ## Summary
 * [Installation](#installation)
+* [Performance](#Performance)
 * [API](#api)
 * [Building](#building)
 
@@ -17,6 +18,21 @@ For simplicity's sake, this module has been written using [serde yaml], but at t
 ```sh
 npm install dessert-yaml-core
 ```
+
+## Performance
+
+Big file (6.85MB)
+|           | dessert-yaml | js-yaml |  yaml-js |
+|:---------:|:------------:|:-------:|:--------:|
+|    load   |    1904ms    |  836ms  |  55461ms |
+|    dump   |     528ms    |  1193ms | 124931ms |
+
+Small file (360 B)
+|           | dessert-yaml | js-yaml | yaml-js |
+|:---------:|:------------:|:-------:|:-------:|
+|    load   |      1ms     |   11ms  |   33ms  |
+|    dump   |      1ms     |   8ms   |   37ms  | 
+
 
 ## API
 This section lists methods exported from Wasm to Javascript.
@@ -27,7 +43,7 @@ Althought this library is usable as-is, it should be used as a dependency for a 
 [dessert-js-yaml]: https://github.com/dessert-wasm/dessert-js-yaml
 
 ``` javascript
-yaml = require('dessert-js-yaml');
+yaml = require('dessert-yaml-core');
 fs   = require('fs');
 
 // Get document, or throw exception on error
