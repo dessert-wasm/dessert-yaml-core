@@ -1,7 +1,7 @@
 Dessert YAML
 ============
 
-[![NPM version](https://img.shields.io/npm/v/dessert-js-yaml.svg)](https://www.npmjs.org/package/dessert-js-yaml)
+[![NPM version](https://img.shields.io/npm/v/dessert-yaml-core.svg)](https://www.npmjs.org/package/dessert-yaml-core)
 
 This library is the base API for YAML modules, written in Rust for WebAssembly.
 
