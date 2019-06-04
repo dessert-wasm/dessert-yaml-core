@@ -22,12 +22,14 @@ npm install dessert-yaml-core
 ## Performance
 
 Big file (6.85MB)
+
 |           | dessert-yaml | js-yaml |  yaml-js |
 |:---------:|:------------:|:-------:|:--------:|
 |    load   |    1904ms    |  836ms  |  55461ms |
 |    dump   |     528ms    |  1193ms | 124931ms |
 
 Small file (360 B)
+
 |           | dessert-yaml | js-yaml | yaml-js |
 |:---------:|:------------:|:-------:|:-------:|
 |    load   |      1ms     |   11ms  |   33ms  |
