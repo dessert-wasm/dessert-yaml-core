@@ -8,7 +8,7 @@ Dessert YAML
 
 [npm-badge]: https://img.shields.io/npm/v/dessert-yaml-core.svg
 [npm-url]: https://www.npmjs.org/package/dessert-yaml-core
-[license-badge]: https://img.shields.io/github/license/dessert-wasm/dessert-filesize-core
+[license-badge]: https://img.shields.io/github/license/dessert-wasm/dessert-yaml-core
 [license]: LICENSE_MIT
 
 > Base API for YAML connectors, written in Rust for WebAssembly.
