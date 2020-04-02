@@ -1,45 +1,37 @@
+[![](https://user-images.githubusercontent.com/25987204/78205790-10b0c680-74d8-11ea-9767-5bb93e920044.png)](https://dessert.dev/)
+
 Dessert YAML
 ============
 
-[![NPM version](https://img.shields.io/npm/v/dessert-yaml-core.svg)](https://www.npmjs.org/package/dessert-yaml-core)
+[![npm-badge]][npm-url]
+[![license-badge]][license]
 
-This library is the base API for YAML modules, written in Rust for WebAssembly.
+[npm-badge]: https://img.shields.io/npm/v/dessert-yaml-core.svg
+[npm-url]: https://www.npmjs.org/package/dessert-yaml-core
+[license-badge]: https://img.shields.io/github/license/dessert-wasm/dessert-filesize-core
+[license]: LICENSE_MIT
+
+> Base API for YAML connectors, written in Rust for WebAssembly.
+
+Existing connectors are:
+* [dessert-js-yaml](https://github.com/dessert-wasm/dessert-js-yaml)
+* [dessert-yaml-js](https://github.com/dessert-wasm/dessert-yaml-js)
 
 For simplicity's sake, this module has been written using [serde yaml], but at the cost of flexibility. Some feature might be missing for now, like passing parsing options when loading/dumping.
 
 [serde yaml]: https://github.com/dtolnay/serde-yaml
 
-## Summary
-* [Installation](#installation)
-* [Performance](#performance)
+## Table of contents
+* [Usage](#usage)
 * [API](#api)
+* [Performance](#performance)
+* [Installation](#installation)
 * [Building](#building)
+* [Testing](#testing)
+* [License](#license)
+* [Contributing](#contributing)
 
-
-## Installation
-```sh
-npm install dessert-yaml-core
-```
-
-## Performance
-
-Big file (6.85MB)
-
-|           | dessert-yaml | js-yaml |  yaml-js |
-|:---------:|:------------:|:-------:|:--------:|
-|    load   |    1904ms    |  836ms  |  55461ms |
-|    dump   |     528ms    |  1193ms | 124931ms |
-
-Small file (360 B)
-
-|           | dessert-yaml | js-yaml | yaml-js |
-|:---------:|:------------:|:-------:|:-------:|
-|    load   |      1ms     |   11ms  |   33ms  |
-|    dump   |      1ms     |   8ms   |   37ms  | 
-
-
-## API
-This section lists methods exported from Wasm to Javascript.
+## Usage
 
 > Note:  
 Althought this library is usable as-is, it should be used as a dependency for a connector, such as [dessert-js-yaml].
@@ -63,6 +55,26 @@ try {
 }
 ```
 
+## Performance
+
+Big file (6.85MB)
+
+|          | dessert-yaml | js-yaml |  yaml-js |
+|:--------:|:------------:|:-------:|:--------:|
+|  `load`  |    1904ms    |  836ms  |  55461ms |
+|  `dump`  |     528ms    |  1193ms | 124931ms |
+
+Small file (360 B)
+
+|          | dessert-yaml | js-yaml | yaml-js |
+|:--------:|:------------:|:-------:|:-------:|
+|  `load`  |      1ms     |   11ms  |   33ms  |
+|  `dump`  |      1ms     |   8ms   |   37ms  | 
+
+
+## API
+This section lists methods exported from Wasm to Javascript.
+
 ### load(string, [, options])
 Most simple way of parsing a document. Parses string as single YAML document. Returns a JavaScript object or throws YAMLException on error. options aren't used as for now.
 
@@ -84,6 +96,11 @@ Serializes object as a YAML document
 Same as dump()
 
 
+## Installation
+```sh
+npm install dessert-yaml-core
+```
+
 ## Building
 The package can be built using [wasm-pack]
 
@@ -93,7 +110,13 @@ The package can be built using [wasm-pack]
 wasm-pack build --target browser
 ```
 
-Testing:
+## Testing
 ```sh
 wasm-pack test --headless --[firefox|chrome|safari]
 ```
+
+## License
+MIT
+
+## Contributing
+See [CONTRIBUTING.md](CONTRIBUTING.md)
