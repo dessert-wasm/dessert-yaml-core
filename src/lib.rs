@@ -12,13 +12,7 @@ use serde_json::Value;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
-extern "C" {
-    #[wasm_bindgen(js_namespace = console)]
-    fn log(s: &str);
-}
-
-#[wasm_bindgen]
-pub fn load(yml_str: &str, options: JsValue) -> Result<JsValue, JsValue> {
+pub fn load(yml_str: &str, options: &JsValue) -> Result<JsValue, JsValue> {
     let yml: serde_json::Value = match serde_yaml::from_str(&yml_str) {
         Ok(res) => res,
         Err(e) => {
@@ -50,17 +44,17 @@ pub fn load(yml_str: &str, options: JsValue) -> Result<JsValue, JsValue> {
 }
 
 #[wasm_bindgen(js_name = safeLoad)]
-pub fn safe_load(yml_str: &str, options: JsValue) -> Result<JsValue, JsValue> {
+pub fn safe_load(yml_str: &str, options: &JsValue) -> Result<JsValue, JsValue> {
     load(yml_str, options)
 }
 
 #[wasm_bindgen(js_name = loadAll)]
-pub fn load_all(yml_str: &str, options: JsValue) -> Result<JsValue, JsValue> {
+pub fn load_all(yml_str: &str, options: &JsValue) -> Result<JsValue, JsValue> {
     load(yml_str, options)
 }
 
 #[wasm_bindgen]
-pub fn dump(object: JsValue, options: JsValue) -> Result<String, JsValue> {
+pub fn dump(object: &JsValue, options: &JsValue) -> Result<String, JsValue> {
     let value: serde_yaml::Value = match object.into_serde() {
         Ok(v) => v,
         Err(e) => {
@@ -71,6 +65,6 @@ pub fn dump(object: JsValue, options: JsValue) -> Result<String, JsValue> {
 }
 
 #[wasm_bindgen(js_name = safeDump)]
-pub fn safe_dump(object: JsValue, options: JsValue) -> Result<String, JsValue> {
+pub fn safe_dump(object: &JsValue, options: &JsValue) -> Result<String, JsValue> {
     dump(object, options)
 }
